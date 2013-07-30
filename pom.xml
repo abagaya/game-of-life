@@ -453,7 +453,6 @@
                             <formats>
                                 <format>xml</format>
                             </formats>
-							<configLocation>target/site/cobertura/coverage.xml</configLocation>
                         </configuration>					
                     </plugin>
                     <plugin>
