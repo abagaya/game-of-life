@@ -453,15 +453,8 @@
                             <formats>
                                 <format>xml</format>
                             </formats>
-                        </configuration>
-						<executions>
-							<execution>
-								<phase>package</phase>
-								<goals>
-									<goal>cobertura</goal>
-								</goals>
-							</execution>
-						</executions>						
+							<configLocation>target/site/cobertura/coverage.xml</configLocation>
+                        </configuration>					
                     </plugin>
                     <plugin>
                         <groupId>org.apache.maven.plugins</groupId>
