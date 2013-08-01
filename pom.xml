@@ -366,6 +366,7 @@
 							<findbugsXmlOutput>true</findbugsXmlOutput>
 							<findbugsXmlWithMessages>true</findbugsXmlWithMessages>
                             <xmlOutput>true</xmlOutput>
+							<xmlOutputDirectory>target/site</xmlOutputDirectory>
                         </configuration>
 					</plugin>
                     <plugin>
