@@ -203,6 +203,12 @@
             <version>1.9.0</version>
             <scope>test</scope>
         </dependency>
+		<dependency>
+            <groupId>maven-plugins</groupId>
+            <artifactId>maven-install-plugin</artifactId>
+            <version>2.4</version>
+            <type>plugin</type>
+        </dependency>
     </dependencies>
 
     <modules>
