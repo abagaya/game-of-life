@@ -352,7 +352,7 @@
                         <version>2.9.1</version>
                         <configuration>
 							<xmlOutput>true</xmlOutput>
-                            <configLocation>gameoflife-build/checkstyle.xml</configLocation>
+                            <configLocation>checkstyle.xml</configLocation>
                         </configuration>
                     </plugin>
                     <plugin>
