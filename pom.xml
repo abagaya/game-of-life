@@ -246,6 +246,7 @@
                             </dependency>
                         </dependencies>
 							<configuration>
+								<xmlOutput>true</xmlOutput>
 								<configLocation>custom-checkstyle.xml</configLocation>
 							</configuration>
                     </plugin>
@@ -350,6 +351,7 @@
                         <artifactId>maven-checkstyle-plugin</artifactId>
                         <version>2.9.1</version>
                         <configuration>
+							<xmlOutput>true</xmlOutput>
                             <configLocation>gameoflife-build/checkstyle.xml</configLocation>
                         </configuration>
                     </plugin>
