@@ -5,13 +5,13 @@
 	
 	<target name="ci2"
         description="Tâche principale"
-        depends="clean,qa"
+        depends="clean2,qa2"
     />
-    <target name="clean" description="Vide les répertoires d'artefacts">  
+    <target name="clean2" description="Vide les répertoires d'artefacts">  
       <delete dir="${project.basedir}/build/phpcs" />
 	  <mkdir dir="${project.basedir}/build/phpcs" />
     </target>
-    <target name="qa" description="Lance les outils d'analyse">
+    <target name="qa2" description="Lance les outils d'analyse">
 		<phingcall target="phpcs" /> 
     </target>     
 		<target name="phpcs">
@@ -20,6 +20,7 @@
 			${project.basedir}/${projet2test}/workspace/src/oxand_lib 
 			> ${project.basedir}/build/phpcs/checkstyle-result.xml" escape="false" />
 		</target>	
+		
 		
     <target name="ci"
         description="Tâche principale d'intégration continue"
