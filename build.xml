@@ -1,29 +1,56 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<project name="gameoflife" default="ci" >
-	<target name="ci"
+<project name="TestDeJenkins" default="ci" basedir="./..">
+	<property name="source" value="src" />
+	
+    <target name="ci"
         description="Tâche principale d'intégration continue"
         depends="clean,qa"
     />
-
+ 
     <target name="clean" description="Vide les répertoires d'artefacts">
-	<delete dir="build/junit" />
-    <delete dir="build/performance" />
-    <delete dir="build/analysis-collector" />
-    <delete dir="build/checkstyle" />
-    <delete dir="build/cobertura" />
-	<delete dir="build/codecover" />
-	<delete dir="build/findbugs" />
-
-    <mkdir dir="build/junit" />
-    <mkdir dir="build/performance" />
-    <mkdir dir="build/analysis-collector" />
-    <mkdir dir="build/cobertura" />
-    <mkdir dir="build/checkstyle" />
-	<mkdir dir="build/codecover" />
-	<mkdir dir="build/findbugs" />
+	  <delete dir="${project.basedir}/build/logs" />
+      <delete dir="${project.basedir}/build/phpcs" />
+	  <delete dir="${project.basedir}/build/phpcpd" />
+	  <delete dir="${project.basedir}/build/pdepend" />
+      <delete dir="${project.basedir}/build/phpmd" />
+      <delete dir="${project.basedir}/build/coverage" />
+      
+	  <mkdir dir="${project.basedir}/build/logs" />
+      <mkdir dir="${project.basedir}/build/phpcs" />
+	  <mkdir dir="${project.basedir}/build/phpcpd" />
+	  <mkdir dir="${project.basedir}/build/pdepend" />
+      <mkdir dir="${project.basedir}/build/phpmd" />
+      <mkdir dir="${project.basedir}/build/coverage" />  
     </target>
-
+	
     <target name="qa" description="Lance les outils d'analyse">
-
-    </target>
+		<phingcall target="phpunit" />  
+		<phingcall target="phpcs" /> 
+		<phingcall target="phpmd" /> 
+		<phingcall target="pdepend" /> 
+    </target>     
+	
+		<target name="phpunit"> 
+			<echo msg="PHP Unit Analysis..." />
+			<exec dir="${project.basedir}/${source}/tests" command="phpunit" escape="false" />
+		</target>  
+		<target name="phpcs">
+			<echo msg="PHP CodeSniffer..." />
+			<exec command="phpcs -n --standard=ZEND --extensions=php,phtml --report=checkstyle 
+			${project.basedir}/${source}/oxand_lib 
+			> ${project.basedir}/build/phpcs/checkstyle-result.xml" escape="false" />
+		</target>
+		<target name="phpcpd">
+			<echo msg="PHP Copy/Paste detect..." />
+			<exec command="phpcpd --log-pmd ${project.basedir}/ > ${project.basedir}/build/phpcpd/phpcpd.xml" escape="false" />
+		</target>
+		<target name="pdepend">
+			<echo msg="PHPDepend Analysis..." />
+			<exec command="pdepend --jdepend-chart ${project.basedir}/${source}/oxand_lib > ${project.basedir}/build/pdepend/dependencies.svg" escape="false" />
+		</target>
+		<target name="phpmd">
+			<echo msg="PHPMD Analysis..." />
+			<exec command="phpmd ${project.basedir}/${source}/oxand_lib xml codesize --suffixes=php,phtml > ${project.basedir}/build/phpmd/phpmd.xml" escape="false" />
+		</target>
+			
 </project>
