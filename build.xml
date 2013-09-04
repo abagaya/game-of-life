@@ -1,12 +1,30 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<project name="TestDeJenkins" default="ci" basedir="./..">
+<project name="TestDeJenkins" default="ci" basedir="./../..">
 	<property name="source" value="src" />
+	<property name="projet2test" value="common-php" />
 	
+	<target name="ci2"
+        description="Tâche principale"
+        depends="clean,qa"
+    />
+    <target name="clean" description="Vide les répertoires d'artefacts">  
+      <delete dir="${project.basedir}/build/phpcs" />
+	  <mkdir dir="${project.basedir}/build/phpcs" />
+    </target>
+    <target name="qa" description="Lance les outils d'analyse">
+		<phingcall target="phpcs" /> 
+    </target>     
+		<target name="phpcs">
+			<echo msg="PHP CodeSniffer..." />
+			<exec command="phpcs -n --standard=ZEND --extensions=php,phtml --report=checkstyle 
+			${project.basedir}/${projet2test}/workspace/src/oxand_lib 
+			> ${project.basedir}/build/phpcs/checkstyle-result.xml" escape="false" />
+		</target>	
+		
     <target name="ci"
         description="Tâche principale d'intégration continue"
         depends="clean,qa"
     />
- 
     <target name="clean" description="Vide les répertoires d'artefacts">
 	  <delete dir="${project.basedir}/build/logs" />
       <delete dir="${project.basedir}/build/phpcs" />
@@ -22,14 +40,12 @@
       <mkdir dir="${project.basedir}/build/phpmd" />
       <mkdir dir="${project.basedir}/build/coverage" />  
     </target>
-	
     <target name="qa" description="Lance les outils d'analyse">
 		<phingcall target="phpunit" />  
 		<phingcall target="phpcs" /> 
 		<phingcall target="phpmd" /> 
 		<phingcall target="pdepend" /> 
     </target>     
-	
 		<target name="phpunit"> 
 			<echo msg="PHP Unit Analysis..." />
 			<exec dir="${project.basedir}/${source}/tests" command="phpunit" escape="false" />
@@ -51,6 +67,5 @@
 		<target name="phpmd">
 			<echo msg="PHPMD Analysis..." />
 			<exec command="phpmd ${project.basedir}/${source}/oxand_lib xml codesize --suffixes=php,phtml > ${project.basedir}/build/phpmd/phpmd.xml" escape="false" />
-		</target>
-			
+		</target>	
 </project>
