@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project name="TestDeJenkins" default="ci" basedir="./../..">
 	<property name="source" value="src" />
-	<property name="projet2test" value="common-php" />
+	<property name="projet2test" value="" />
 	
 	<target name="ci2"
         description="Tâche principale"
