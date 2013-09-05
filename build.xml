@@ -12,9 +12,9 @@
 	  <mkdir dir="${project.basedir}/build/phpcs" />
     </target>
     <target name="qa2" description="Lance les outils d'analyse">
-		<phingcall target="phpcs" /> 
+		<phingcall target="phpcs2" /> 
     </target>     
-		<target name="phpcs">
+		<target name="phpcs2">
 			<echo msg="PHP CodeSniffer..." />
 			<exec command="phpcs -n --standard=ZEND --extensions=php,phtml --report=checkstyle 
 			${project.basedir}/${projet2test}/workspace/src/oxand_lib 
