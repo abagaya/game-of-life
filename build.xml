@@ -8,8 +8,8 @@
         depends="clean2,qa2"
     />
     <target name="clean2" description="Vide les répertoires d'artefacts">  
-      <delete dir="${project.basedir}/build/phpcs" />
-	  <mkdir dir="${project.basedir}/build/phpcs" />
+      <delete dir="${project.basedir}/workspace/build/phpcs" />
+	  <mkdir dir="${project.basedir}/workspace/build/phpcs" />
     </target>
     <target name="qa2" description="Lance les outils d'analyse">
 		<phingcall target="phpcs2" /> 
@@ -17,8 +17,8 @@
 		<target name="phpcs2">
 			<echo msg="PHP CodeSniffer..." />
 			<exec command="phpcs -n --standard=ZEND --extensions=php,phtml --report=checkstyle 
-			${project.basedir}/${projet2test}/workspace/src/oxand_lib 
-			> ${project.basedir}/build/phpcs/checkstyle-result.xml" escape="false" />
+			${project.basedir}/workspace/src/oxand_lib 
+			> ${project.basedir}/workspace/build/phpcs/checkstyle-result.xml" escape="false" />
 		</target>	
 		
 		
